@@ -9,7 +9,7 @@
 //     browsers don't care about and crawlers reach via the sitemap anyway.)
 //  2. .nojekyll — without it Pages runs the output through Jekyll, which strips
 //     files and folders whose names begin with an underscore.
-import { copyFileSync, existsSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const dist = resolve(import.meta.dirname, "..", "dist");
@@ -19,6 +19,27 @@ if (!existsSync(indexHtml)) {
   console.error("[pages] dist/index.html missing - run `vite build` first");
   process.exit(1);
 }
+
+// scripts/prerender.mjs bakes the home route's markup into #root by rendering
+// the .tsx sources directly in node. That path never goes through vite, so the
+// base-prefix plugin in vite.config.ts does not see it and the markup lands
+// holding root-absolute "/assets/..." URLs that 404 under a project subpath.
+// Rewriting here, after prerender has run, is the one place that catches every
+// producer of the final HTML.
+//
+// Written to be idempotent: strip any prefix already present before adding it,
+// so re-running the step (or a future prerender that gets this right) cannot
+// double up into "/repo/repo/assets/".
+function applyBase(html, prefix) {
+  if (!prefix) return html;
+  return html
+    .split(`"${prefix}/assets/`).join('"/assets/')
+    .split('"/assets/').join(`"${prefix}/assets/`);
+}
+
+const prefix = (process.env.GH_PAGES_BASE ?? "/anirudh-portfolio/").replace(/\/$/, "");
+const rewritten = applyBase(readFileSync(indexHtml, "utf8"), prefix);
+writeFileSync(indexHtml, rewritten);
 
 copyFileSync(indexHtml, resolve(dist, "404.html"));
 writeFileSync(resolve(dist, ".nojekyll"), "");
