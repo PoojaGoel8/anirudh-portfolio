@@ -40,7 +40,12 @@ jobs:
           GH_PAGES_BASE: /${{ github.event.repository.name }}/
         run: pnpm --filter client build:pages
 
+      # `enablement` turns Pages on via the API when the repo has not had it
+      # switched on by hand. Without it this step fails with a bare "Not Found"
+      # on a repo whose Pages settings were never touched.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
