@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portable portfolio of Anirudh Dalmia: AI transformation, financial crime, programme leadership, entrepreneurship, coaching, and community impact.">
+  <title>Anirudh Dalmia — Portfolio</title>
+  <style>
+    :root{--royal:#164b91;--deep:#0d2f61;--ink:#17243b;--muted:#5d6a7e;--line:#d8e0e9;--paper:#f7f8fa;--sky:#eaf1f9;--serif:Georgia,"Times New Roman",serif;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65}
+    a{color:inherit}
+    .shell{width:min(1080px,calc(100% - 40px));margin:auto}
+    header{border-bottom:1px solid var(--line);background:#fff}
+    .nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .mark{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--royal);border-radius:50%;color:var(--royal);font-size:12px;font-weight:800;letter-spacing:.08em}
+    .brand strong,.brand small{display:block}
+    .brand small{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.09em}
+    .nav-links{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;font-weight:700}
+    .nav-links a{color:var(--deep);text-decoration:none}
+    section{padding:82px 0;border-bottom:1px solid var(--line)}
+    .about{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:64px}
+    .eyebrow{margin:0 0 16px;color:var(--royal);font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.04em}
+    h1{max-width:780px;margin:0;font-size:clamp(3.5rem,8vw,6.8rem);line-height:.94}
+    h1 em{color:var(--royal);font-weight:inherit}
+    h2{max-width:780px;margin:0;font-size:clamp(2.3rem,5vw,4.5rem);line-height:1}
+    h3{margin:0;font-size:1.7rem;line-height:1.1}
+    .lede{max-width:730px;margin:26px 0 0;color:var(--muted);font-size:17px}
+    .hero-media{position:relative;padding:0 22px 28px 0}
+    .hero-media:before{content:"";position:absolute;inset:30px 0 0 38px;border:1px solid #afc5df}
+    .hero-media img{position:relative;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:58% center}
+    .hero-note{position:absolute;right:-8px;bottom:0;max-width:250px;padding:16px 18px;background:#fff;box-shadow:0 18px 45px rgba(15,43,79,.16)}
+    .hero-note span{display:block;color:#7a8494;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+    .hero-note strong{color:var(--deep);font:600 16px/1.3 var(--serif)}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1px solid #cbd5e1;border-radius:3px;color:var(--deep);text-decoration:none;font-size:12px;font-weight:800}
+    .button.primary{border-color:var(--royal);background:var(--royal);color:#fff}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:48px}
+    .metric{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+    .metric strong{display:block;color:var(--royal);font:500 2.8rem/1 var(--serif)}
+    .metric span{display:block;margin-top:10px;font-size:12px;font-weight:800}
+    .metric small{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:38px}
+    .card{padding:27px;border:1px solid var(--line);background:#fff}
+    .card .meta{color:var(--royal);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+    .card p{color:var(--muted);font-size:13px}
+    .card strong{color:var(--deep);font-size:12px}
+    .timeline{margin-top:40px;border-top:1px solid var(--line)}
+    .role{display:grid;grid-template-columns:170px 1fr;gap:30px;padding:25px 0;border-bottom:1px solid var(--line)}
+    .role time{color:var(--royal);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    .role p{margin:9px 0 0;color:var(--muted);font-size:13px}
+    .proof{display:grid;grid-template-columns:repeat(3,1fr);margin-top:38px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .proof article{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+    .proof article.featured{grid-column:span 2;padding:0;background:var(--deep);color:#fff}
+    .proof article.featured img{width:100%;aspect-ratio:3/2;object-fit:cover}
+    .proof article.featured div{padding:26px}
+    .proof article.featured span{color:#a8c9ec}
+    .proof article.featured p{color:#c4d2e0}
+    .proof span{color:var(--royal);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    blockquote{margin:0;font:400 clamp(1.8rem,4vw,3.4rem)/1.12 var(--serif);letter-spacing:-.035em}
+    .quote{padding:32px;background:var(--sky)}
+    .quote cite{display:block;margin-top:20px;color:var(--muted);font:normal 11px/1.5 var(--sans)}
+    footer{padding:46px 0;background:#081b38;color:#fff}
+    footer p{color:#9fb0c5}
+    footer .button{border-color:rgba(255,255,255,.35);color:#fff}
+    .footer-row{display:flex;align-items:end;justify-content:space-between;gap:30px}
+    @media(max-width:760px){.nav{align-items:flex-start;flex-direction:column;padding:16px 0}.about{grid-template-columns:1fr}.metrics,.proof{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.role{grid-template-columns:1fr;gap:5px}.footer-row{align-items:flex-start;flex-direction:column}}
+    @media(max-width:480px){section{padding:58px 0}.metrics,.proof{grid-template-columns:1fr}.proof article.featured{grid-column:span 1}.actions{align-items:stretch;flex-direction:column}.button{width:100%}}
+    @media print{body{background:#fff}.nav-links,.actions,.hero-media{display:none}section{padding:34px 0;break-inside:avoid}footer{background:#fff;color:var(--ink);border:1px solid var(--line)}footer p{color:var(--muted)}h1{font-size:48px}h2{font-size:32px}.about{grid-template-columns:1fr}.shell{width:100%}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#about-me">
+        <span class="mark">AD</span>
+        <span><strong>Anirudh Dalmia</strong><small>Transformation · Risk · AI</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Portfolio sections">
+        <a href="#work">Work</a><a href="#experience">Experience</a><a href="#leadership">Leadership</a><a href="#recommendations">Recommendations</a><a href="https://5ff7e81dc1b1dd02-jehqctuqsz.skywork.website/assets/documents/anirudh-dalmia-resume.pdf" download>Résumé</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="about-me">
+      <div class="shell about">
+        <div>
+          <p class="eyebrow">About me</p>
+          <h1>Leading change where <em>systems</em> meet people.</h1>
+          <p class="lede">I turn complex regulatory and operating problems into governed roadmaps, reusable AI products, and adoption programmes that people can trust—and use. My path also spans entrepreneurship, sustainability, coaching, debating, film, and community leadership.</p>
+        </div>
+        <div class="hero-media">
+          <img src="https://5ff7e81dc1b1dd02-jehqctuqsz.skywork.website/assets/slots/home.hero.webp" alt="Anirudh Dalmia delivering a guest-of-honour address on stage">
+          <div class="hero-note"><span>Current focus</span><strong>Responsible AI at enterprise scale</strong></div>
+        </div>
+      </div>
+      <div class="shell actions">
+        <a class="button primary" href="#work">Explore selected work</a>
+        <a class="button" href="https://5ff7e81dc1b1dd02-jehqctuqsz.skywork.website/assets/documents/anirudh-dalmia-resume.pdf" download>Download résumé</a>
+        <a class="button" href="https://www.linkedin.com/in/anirudh-dalmia/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="button" href="mailto:anirudhdalmia@hotmail.com">Email</a>
+      </div>
+      <div class="shell metrics" aria-label="Selected impact metrics">
+        <div class="metric"><strong>40+</strong><span>AI champions mobilised</span><small>Deutsche Bank Singapore</small></div>
+        <div class="metric"><strong>500+</strong><span>AFC professionals equipped</span><small>Across approximately 10 countries</small></div>
+        <div class="metric"><strong>80%</strong><span>Reduction in workflow errors</span><small>Through risk-signal redesign</small></div>
+        <div class="metric"><strong>3,000+</strong><span>Employees reached</span><small>Regional learning programmes</small></div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="shell">
+        <p class="eyebrow">Selected transformation work</p>
+        <h2>From ambiguity to governed adoption.</h2>
+        <div class="grid">
+          <article class="card"><p class="meta">AI Transformation · 2026–Present</p><h3>Singapore AI Catalyst Think Tank</h3><p>Scaled an Anti-Financial Crime pilot into a branch-wide forum connecting business and infrastructure teams around responsible AI adoption, reuse, and execution.</p><strong>40+ AI champions mobilised across the Singapore franchise.</strong></article>
+          <article class="card"><p class="meta">Change & Adoption · 2026–Present</p><h3>Regional AI literacy for AFC</h3><p>Designed forums, workshops, prompt guidance, and practical AML/CFT use cases to move teams from individual experimentation toward governed adoption.</p><strong>500+ professionals equipped across APAC and MEA.</strong></article>
+          <article class="card"><p class="meta">Risk & Controls · 2019–2025</p><h3>APAC risk-signal workflow redesign</h3><p>Led multi-market operating-model and workflow change in Anti-Bribery & Corruption while balancing control integrity with practical delivery.</p><strong>Reduced errors by 80% while strengthening controls.</strong></article>
+          <article class="card"><p class="meta">AI Transformation · 2026</p><h3>Adverse-media intelligence capability</h3><p>Evolved a case-specific work product into a reusable, configurable dashboard approach for adverse-media analysis and senior reporting.</p><strong>Controlled testing with complex-client and cross-regional interest.</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="shell">
+        <p class="eyebrow">Experience</p>
+        <h2>A career built across disciplines.</h2>
+        <div class="timeline">
+          <article class="role"><time>Jan 2026–Present</time><div><h3>AI Transformation Lead / Regional AI Champion, Compliance & AFC, APAC</h3><p>Deutsche Bank, Singapore — responsible AI adoption, regulatory remediation, risk analysis, onboarding, Source of Wealth, adverse-media intelligence, and workflow automation.</p></div></article>
+          <article class="role"><time>Jan 2026–Present</time><div><h3>Private Bank Business Line AFC / Singapore AML Officer · AVP</h3><p>Deutsche Bank, Singapore — AML/CTF, sanctions, client risk, regulatory requirements, investigations, controls, and high-risk escalations.</p></div></article>
+          <article class="role"><time>Nov 2019–Dec 2025</time><div><h3>Anti-Bribery & Corruption Officer · AVP, Associate & Analyst</h3><p>Deutsche Bank, Singapore — regional control and transformation work across operating-model redesign, risk signals, regulatory analysis, investigations, learning, and global change.</p></div></article>
+          <article class="role"><time>Nov 2018–Nov 2019</time><div><h3>Financial Advisor</h3><p>AXA Insurance, Singapore — financial and communication strategies supporting client trust and informed decision-making.</p></div></article>
+          <article class="role"><time>Sep 2017–Feb 2018</time><div><h3>Management Consultant · UOB–SMU Asian Enterprise</h3><p>Led focus groups, market surveys, observation, secondary research, and business-development planning.</p></div></article>
+          <article class="role"><time>University years · Pre-2018</time><div><h3>Founder · Road to Sangam</h3><p>Built an all-India digital art aggregator and gig ecosystem across e-commerce, workshops, galleries, and corporate marketing services.</p></div></article>
+          <article class="role"><time>Jun–Aug 2017</time><div><h3>Sustainability Relations Intern · Golden Agri-Resources</h3><p>Prepared European Union position-paper foundations on sustainable palm oil and introduced trend analysis for digital communications.</p></div></article>
+          <article class="role"><time>2016 · Four months</time><div><h3>Editorial & Communications Intern · LIV.IN Asia</h3><p>Delivered editorial and creative assignments recognised for intellect, accountability, enthusiasm, and natural leadership.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="eyebrow">Early foundations</p>
+        <h2>Consulting, sustainability, and editorial craft.</h2>
+        <div class="grid">
+          <article class="card"><p class="meta">UOB–SMU Asian Enterprise</p><h3>Management Consultant</h3><p>Led focus groups, market surveys, observation, secondary research, and business-development planning.</p></article>
+          <article class="card"><p class="meta">Golden Agri-Resources</p><h3>Sustainability Relations Intern</h3><p>Prepared European Union position-paper foundations on sustainable palm oil and introduced trend analysis for digital communications.</p></article>
+          <article class="card"><p class="meta">LIV.IN Asia</p><h3>Editorial & communications intern</h3><p>Delivered editorial and creative assignments recognised for intellect, accountability, enthusiasm, and natural leadership.</p></article>
+          <article class="card"><p class="meta">Singapore Management University · 2018</p><h3>Business Management</h3><p>Double major in Marketing and Psychology; Vice President of the SMU Debate Society.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="leadership">
+      <div class="shell">
+        <p class="eyebrow">Leadership & impact</p>
+        <h2>The stage, classroom, community, and film set.</h2>
+        <div class="proof">
+          <article class="featured"><img src="https://us-tiangong-data.oss-accelerate.aliyuncs.com/skycode/video/2026-09-02/2095195540375445504.webp" alt="Anirudh Dalmia leading a fireside chat and addressing delegates at Toastmasters District 80 Annual Conference 2025"><div><span>Toastmasters District 80 · 9–11 May 2025</span><h3>Annual Conference Master of Ceremonies</h3><p>Led the three-day Annual Conference at One°15 Marina Club, hosted its gala and key sessions, and moderated a fireside chat with World Champion Verity Price for an international delegation.</p></div></article>
+          <article><span>Toastmasters District 80</span><h3>Hall of Fame host</h3><p>Hosted the district’s biggest night for two consecutive years; Area Director for Toastmasters Singapore, 2024–25.</p></article>
+          <article><span>SP Jain University Singapore · 2018–2024</span><h3>Debate Coach</h3><p>Six years helping speakers test assumptions, structure arguments, and communicate under pressure.</p></article>
+          <article><span>Competitive debate</span><h3>Regional & national winner</h3><p>Winner of regional and national debate tournaments; Vice President of the SMU Debate Society.</p></article>
+          <article><span>Mental wellbeing</span><h3>Writer, director & producer</h3><p>Created a film for employee mental wellbeing and contributed to the Mental Health Film Festival Singapore.</p><a href="https://www.youtube.com/watch?v=10SKVUuWJwk&t=33s" target="_blank" rel="noreferrer">Watch the film</a></article>
+          <article><span>Fundraising</span><h3>250 km cycling challenge</h3><p>Completed a Singapore-to-Malacca ride supporting a wider mental-health campaign that raised more than $120,000.</p></article>
+          <article><span>Community</span><h3>Speaker, host & advocate</h3><p>Guest of Honour at Lady Andal school, Halogen Foundation Charity Champion, and community-event host.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <div class="shell">
+        <p class="eyebrow">Recommendations</p>
+        <div class="grid">
+          <figure class="quote"><blockquote>“He truly understands the change function and the change lifecycle, and articulates complex requirements clearly.”</blockquote><cite>Nav Dhaliwal · Change Management for Regulation, Compliance & AFC, Deutsche Bank</cite></figure>
+          <figure class="quote"><blockquote>“Anirudh brings a unique set of skills: critical analysis of data and the ability to engage a target audience.”</blockquote><cite>Si-Min Chua · Anti-Fraud, Bribery & Corruption Advisory, APAC, Deutsche Bank</cite></figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <div><p class="eyebrow" style="color:#a8c9ec">Build meaningful change</p><h2>Complexity becomes progress when people can see the path.</h2></div>
+      <div class="actions"><a class="button" href="mailto:anirudhdalmia@hotmail.com">Email Anirudh</a><a class="button" href="https://www.linkedin.com/in/anirudh-dalmia/" target="_blank" rel="noreferrer">LinkedIn</a><a class="button" href="https://5ff7e81dc1b1dd02-jehqctuqsz.skywork.website/assets/documents/anirudh-dalmia-resume.pdf" download>Download résumé</a></div>
+    </div>
+  </footer>
+</body>
+</html>
