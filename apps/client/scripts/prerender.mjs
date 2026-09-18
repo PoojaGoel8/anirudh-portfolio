@@ -288,11 +288,12 @@ async function run() {
     await build({
       configFile: false,
       logLevel: "error",
-      // This SSR build is configured from scratch, so it does not inherit the
-      // `base` from vite.config.ts. Without it, import.meta.env.BASE_URL
-      // compiles to "/" here and <BrowserRouter basename> renders every route
-      // link root-absolute, e.g. href="/work" instead of "/repo/work".
-      base: process.env.GH_PAGES_BASE ?? "/",
+      // Deliberately left at the default "/" base. Compiling the real base into
+      // import.meta.env.BASE_URL here gives <BrowserRouter> a basename that the
+      // happy-dom window URL below ("/") does not match, so react-router
+      // resolves no route and renders an empty #root. The links this produces
+      // are root-absolute; scripts/pages-postbuild.mjs rewrites them onto the
+      // base afterwards.
       plugins: [createPrerenderSafeRenderPlugin(cwd), componentTagger(), reactPlugin()],
       resolve: { alias: { "@": resolve(cwd, "src") } },
       build: {
