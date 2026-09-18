@@ -45,9 +45,27 @@ function applyBase(html, prefix) {
   });
 }
 
+// og:image and twitter:image have to be absolute. Facebook, LinkedIn, X and
+// WhatsApp all resolve them against nothing, so a root- or base-relative path
+// means no preview card at all - the single most visible piece of metadata on
+// a portfolio that gets shared on LinkedIn. Everything else stays relative so
+// the site keeps working on any host.
+function absolutiseSocialImages(html, origin) {
+  if (!origin) return html;
+  const base = origin.replace(/\/$/, "");
+  return html.replace(
+    /(<meta\s+(?:property|name)="(?:og:image|twitter:image)"\s+content=")(\/[^"]*)"/g,
+    (_match, head, path) => `${head}${base}${path}"`
+  );
+}
+
 const prefix = (process.env.GH_PAGES_BASE ?? "/anirudh-portfolio/").replace(/\/$/, "");
-const rewritten = applyBase(readFileSync(indexHtml, "utf8"), prefix);
-writeFileSync(indexHtml, rewritten);
+// Override with SITE_ORIGIN when the site moves to a custom domain.
+const origin = process.env.SITE_ORIGIN ?? "https://poojagoel8.github.io";
+
+let html = applyBase(readFileSync(indexHtml, "utf8"), prefix);
+html = absolutiseSocialImages(html, origin);
+writeFileSync(indexHtml, html);
 
 copyFileSync(indexHtml, resolve(dist, "404.html"));
 writeFileSync(resolve(dist, ".nojekyll"), "");

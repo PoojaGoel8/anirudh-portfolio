@@ -18,6 +18,8 @@ export default function AboutPage() {
             alt="Portrait of Anirudh Dalmia"
             width="520"
             height="620"
+            loading="lazy"
+            decoding="async"
           />
           <span>Singapore · English · Hindi · Tamil</span>
         </div>

@@ -43,10 +43,7 @@ coverage/
 
 # --- Build outputs / caches ---
 apps/client/dist/
-dist-ssr/
 build/
-electron-dist/
-dist-electron/
 out/
 bin/
 .tmp/
@@ -105,5 +102,5 @@ Thumbs.db
 uploaded_files/
 
 # !!! DO NOT DELETE OR ADJUST: required by FC deploy flow !!!
-!apps/server/dist/
 # !!! END: changing this will break FC deployment !!!
+dist-ssr/

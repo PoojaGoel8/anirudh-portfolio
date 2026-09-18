@@ -16,6 +16,8 @@ const stories = [
         alt="Anirudh Dalmia leading a fireside chat and addressing delegates at Toastmasters District 80 Annual Conference 2025"
         width="900"
         height="600"
+        loading="lazy"
+        decoding="async"
       />
     ),
   },
@@ -32,6 +34,8 @@ const stories = [
         alt="Anirudh Dalmia hosting a Toastmasters District 80 event"
         width="760"
         height="520"
+        loading="lazy"
+        decoding="async"
       />
     ),
   },
@@ -48,6 +52,8 @@ const stories = [
         alt="Anirudh Dalmia moderating a Mental Health Film Festival event"
         width="760"
         height="520"
+        loading="lazy"
+        decoding="async"
       />
     ),
   },
@@ -64,6 +70,8 @@ const stories = [
         alt="Anirudh Dalmia during a 250 kilometre mental-health fundraising ride"
         width="760"
         height="520"
+        loading="lazy"
+        decoding="async"
       />
     ),
   },
@@ -80,6 +88,8 @@ const stories = [
         alt="Anirudh Dalmia returning to his school as Guest of Honour"
         width="760"
         height="520"
+        loading="lazy"
+        decoding="async"
       />
     ),
   },
@@ -202,6 +212,8 @@ export default function LeadershipPage() {
           alt="Anirudh Dalmia speaking at The Volunteer Switchboard anniversary"
           width="760"
           height="520"
+          loading="lazy"
+          decoding="async"
         />
       </Reveal>
     </>

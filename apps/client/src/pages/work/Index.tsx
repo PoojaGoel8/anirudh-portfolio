@@ -58,6 +58,8 @@ export default function WorkPage() {
               alt="Anirudh Dalmia at a Singapore AI Catalyst Think Tank session"
               width="900"
               height="600"
+              loading="lazy"
+              decoding="async"
             />
             <div>
               <p className="eyebrow">Featured programme</p>

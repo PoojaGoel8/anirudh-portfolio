@@ -41,6 +41,9 @@ jobs:
           # Derived from the repo name, so renaming the repo or forking it keeps
           # the asset paths correct with no edit here.
           GH_PAGES_BASE: /${{ github.event.repository.name }}/
+          # Social preview images must be absolute URLs. Set this to the custom
+          # domain (e.g. https://example.com) if the site moves off github.io.
+          SITE_ORIGIN: https://${{ github.repository_owner }}.github.io
         run: pnpm --filter client build
 
       # `enablement` turns Pages on via the API when the repo has not had it

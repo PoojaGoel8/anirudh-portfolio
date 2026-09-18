@@ -55,6 +55,7 @@ const Index = () => (
             alt="Anirudh Dalmia delivering a guest-of-honour address on stage"
             width="760"
             height="860"
+            fetchPriority="high"
           />
           <span className="image-caption">Guest of Honour · Lady Andal School · 2026</span>
         </div>
@@ -104,6 +105,8 @@ const Index = () => (
                 alt="Anirudh Dalmia at a Singapore AI Catalyst Think Tank session"
                 width="900"
                 height="600"
+                loading="lazy"
+                decoding="async"
               />
             ) : null}
             <div className="work-card-content">
@@ -164,6 +167,8 @@ const Index = () => (
           alt="Anirudh Dalmia leading a fireside chat and addressing delegates at Toastmasters District 80 Annual Conference 2025"
           width="760"
           height="520"
+          loading="lazy"
+          decoding="async"
         />
         <span className="floating-label">Annual Conference MC · Host · Coach</span>
       </div>
