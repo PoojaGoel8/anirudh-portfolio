@@ -60,8 +60,11 @@ function absolutiseSocialImages(html, origin) {
 }
 
 const prefix = (process.env.GH_PAGES_BASE ?? "/anirudh-portfolio/").replace(/\/$/, "");
-// Override with SITE_ORIGIN when the site moves to a custom domain.
-const origin = process.env.SITE_ORIGIN ?? "https://poojagoel8.github.io";
+// Override with SITE_ORIGIN when the site moves to a custom domain. Lowercased
+// because the workflow derives it from the repo owner, which keeps its original
+// capitalisation: hostnames resolve either way, but scrapers and canonical URLs
+// are better off with one consistent spelling.
+const origin = (process.env.SITE_ORIGIN ?? "https://poojagoel8.github.io").toLowerCase();
 
 let html = applyBase(readFileSync(indexHtml, "utf8"), prefix);
 html = absolutiseSocialImages(html, origin);
