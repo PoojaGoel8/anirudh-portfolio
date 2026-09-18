@@ -27,14 +27,22 @@ if (!existsSync(indexHtml)) {
 // Rewriting here, after prerender has run, is the one place that catches every
 // producer of the final HTML.
 //
-// Written to be idempotent: strip any prefix already present before adding it,
-// so re-running the step (or a future prerender that gets this right) cannot
-// double up into "/repo/repo/assets/".
+// This covers route links as well as assets. The prerendered <a href> values
+// come from react-router, which uses import.meta.env.BASE_URL, so they are only
+// correct if the SSR build was told the base. Rewriting here means the output
+// is right even when that does not hold.
+//
+// Skips anything already carrying the prefix, so the step is idempotent and
+// cannot produce "/repo/repo/...". Protocol-relative "//host/path" is left
+// alone; only src/href are touched, since a bare "content" attribute is not
+// reliably a URL.
 function applyBase(html, prefix) {
   if (!prefix) return html;
-  return html
-    .split(`"${prefix}/assets/`).join('"/assets/')
-    .split('"/assets/').join(`"${prefix}/assets/`);
+  return html.replace(/\b(src|href)="\/(?!\/)([^"]*)"/g, (match, attr, rest) => {
+    const path = `/${rest}`;
+    if (path === prefix || path.startsWith(`${prefix}/`)) return match;
+    return `${attr}="${prefix}${path}"`;
+  });
 }
 
 const prefix = (process.env.GH_PAGES_BASE ?? "/anirudh-portfolio/").replace(/\/$/, "");

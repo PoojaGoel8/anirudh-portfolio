@@ -288,6 +288,11 @@ async function run() {
     await build({
       configFile: false,
       logLevel: "error",
+      // This SSR build is configured from scratch, so it does not inherit the
+      // `base` from vite.config.ts. Without it, import.meta.env.BASE_URL
+      // compiles to "/" here and <BrowserRouter basename> renders every route
+      // link root-absolute, e.g. href="/work" instead of "/repo/work".
+      base: process.env.GH_PAGES_BASE ?? "/",
       plugins: [createPrerenderSafeRenderPlugin(cwd), componentTagger(), reactPlugin()],
       resolve: { alias: { "@": resolve(cwd, "src") } },
       build: {
