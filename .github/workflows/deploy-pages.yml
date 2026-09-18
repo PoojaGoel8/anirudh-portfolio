@@ -31,7 +31,10 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --no-frozen-lockfile
+      # Strict: fail if pnpm-lock.yaml disagrees with package.json rather than
+      # quietly re-resolving, so a deploy always installs the exact tree that
+      # was committed. A failure here means the lockfile needs committing.
+      - run: pnpm install --frozen-lockfile
 
       - name: Build static site
         env:
