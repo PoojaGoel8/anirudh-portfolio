@@ -1,6 +1,5 @@
 // vite.config.ts
-import { defineConfig, loadEnv, type Plugin } from 'vite';
-import devServer, { defaultOptions } from '@hono/vite-dev-server';
+import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react-oxc';
 import tailwindcss from '@tailwindcss/vite';
 import fs from 'node:fs/promises';
@@ -234,21 +233,7 @@ function basePrefixAssets(base: string): Plugin {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode, command }) => {
-  // The in-process Hono dev server (@hono/vite-dev-server) reads runtime config
-  // such as SKYBASE_DB_* / BETTER_AUTH_* from process.env. Vite's envDir only
-  // exposes VITE_-prefixed vars to the client bundle, so without this the
-  // embedded server boots with no DB config and every /api/auth call 503s.
-  // Guarded to `serve` so `vite build` and vitest (which uses its own
-  // vitest.config.ts and never loads this file) are unaffected. We never
-  // overwrite vars already present, so deploy-injected env still wins.
-  if (command === 'serve') {
-    const runtimeEnv = loadEnv(mode, path.resolve(__dirname, '../..'), ['SKYBASE_DB_', 'BETTER_AUTH_', 'ALLOWED_ORIGINS']);
-    for (const [key, value] of Object.entries(runtimeEnv)) {
-      if (process.env[key] === undefined && value !== '') process.env[key] = value;
-    }
-  }
-
+export default defineConfig(({ mode }) => {
   // GitHub Pages serves a project site from a subpath
   // (https://<user>.github.io/<repo>/), so every asset URL needs that prefix
   // baked in at build time. Override with GH_PAGES_BASE when the repo is
@@ -259,17 +244,11 @@ export default defineConfig(({ mode, command }) => {
 
   return {
     base,
-    envDir: "../..",
     server: {
       host: "::",
       port: 3100,
     },
     plugins: [
-      mode === 'development' &&
-      devServer({
-        entry: '../server/_core/create-app.ts',
-        exclude: [/^(?!\/api(?:\/|$)).*/, ...defaultOptions.exclude],
-      }),
       tailwindcss(),
       // Editor tooling that annotates DOM nodes with source locations. Useless
       // weight on a public static host, so production builds skip it.

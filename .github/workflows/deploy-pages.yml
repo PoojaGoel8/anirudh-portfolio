@@ -38,7 +38,7 @@ jobs:
           # Derived from the repo name, so renaming the repo or forking it keeps
           # the asset paths correct with no edit here.
           GH_PAGES_BASE: /${{ github.event.repository.name }}/
-        run: pnpm --filter client build:pages
+        run: pnpm --filter client build
 
       # `enablement` turns Pages on via the API when the repo has not had it
       # switched on by hand. Without it this step fails with a bare "Not Found"
