@@ -1,185 +1,94 @@
-# Coding Agent Web Template
+# Anirudh Dalmia — Portfolio
 
-Full-stack template for generated web apps.
+Personal portfolio site for Anirudh Dalmia, covering AI transformation,
+financial crime risk, regulated change, and programme leadership.
 
-## What Is Included
+**Live:** https://poojagoel8.github.io/anirudh-portfolio/
 
-- React client in `apps/client`
-- Hono backend in `apps/server`
-- Better Auth for user authentication
-- Server-only skybase-db access through Drizzle ORM over libsql
-- Shared response helpers in `packages/shared`
+Static React site, no backend. Every page renders from a single content file.
 
-## Local Development
+## Editing the content
 
-Install dependencies:
+Almost all copy lives in one place:
+
+```txt
+apps/client/src/data/portfolio.ts
+```
+
+Edit it, commit, push. The site rebuilds and redeploys itself.
+
+Images and documents are plain files under `apps/client/public/assets/`.
+Reference them root-absolute — `/assets/slots/home.hero.webp` — and the build
+rewrites them onto the correct base path.
+
+## Running locally
 
 ```bash
 pnpm install
-```
-
-Start the local app:
-
-```bash
-cd apps/client
 pnpm dev
 ```
 
-Open:
+Then open http://localhost:3100/.
 
-```txt
-http://localhost:3100/
-```
-
-The Vite dev server mounts the Hono backend under `/api/*` on the same origin.
-
-The Vite dev server serves history routes from the same client app. For example:
-
-```txt
-http://localhost:3100/
-```
-
-## Runtime Env
-
-Frontend env is public and must use `VITE_`.
-
-Backend DB env is injected into the running function by skybase-controller for the current `session_id`. Local `.env` values are only for development/debugging.
-
-Backend runtime env contract:
-
-| Env | Required | Source | Purpose |
-| --- | --- | --- | --- |
-| `SKYBASE_DB_ENDPOINT` | Yes for DB-backed APIs | skybase-controller | sqld/libsql user API endpoint for this session, for example `http://10.59.118.218:8080` |
-| `SKYBASE_DB_TOKEN` / `SKYBASE_DB_AUTH_TOKEN` | Yes for DB-backed APIs | skybase-controller | libsql rw token used as `Authorization: Bearer <token>`; `SKYBASE_DB_AUTH_TOKEN` is accepted as a controller-compatible alias |
-| `SKYBASE_DB_NAMESPACE` | Yes for DB-backed APIs | skybase-controller | tenant namespace sent as `x-namespace` on libsql requests |
-| `BETTER_AUTH_SECRET` | Recommended for production | controller/deploy config, local `.env` in dev | Better Auth signing secret |
-| `BETTER_AUTH_URL` | Yes | controller/deploy config, local `.env` in dev | Public auth base URL, for example `http://localhost:3100/api/auth` |
-| `ALLOWED_ORIGINS` | Yes | controller/deploy config, local `.env` in dev | Comma-separated CORS origins |
-| `GOOGLE_CLIENT_ID` | Optional | OAuth provider config | Enables Google login when paired with `GOOGLE_CLIENT_SECRET` |
-| `GOOGLE_CLIENT_SECRET` | Optional | OAuth provider config | Enables Google login when paired with `GOOGLE_CLIENT_ID` |
-
-`SKYBASE_DB_TOKEN` / `SKYBASE_DB_AUTH_TOKEN` is not a Better Auth session token, user token, or skybase-controller `X-Auth-Token`. It is the libsql database token injected into this backend runtime. The app does not create this token and does not use DB admin email/password at runtime. Template code normalizes both names to `env.SKYBASE_DB_TOKEN`; when both names are present, `SKYBASE_DB_AUTH_TOKEN` wins.
-
-Local development can use a root `.env` file:
-
-```env
-SKYBASE_DB_ENDPOINT=http://127.0.0.1:8080
-SKYBASE_DB_AUTH_TOKEN=...
-# SKYBASE_DB_TOKEN=... also works as a legacy alias
-SKYBASE_DB_NAMESPACE=local
-BETTER_AUTH_SECRET=replace-with-a-local-secret
-BETTER_AUTH_URL=http://localhost:3100/api/auth
-ALLOWED_ORIGINS=http://localhost:3100
-```
-
-If Vite starts on a fallback port such as `3101`, update `BETTER_AUTH_URL` and `ALLOWED_ORIGINS` to that port for local testing.
-
-Production startup does not fail when `BETTER_AUTH_SECRET` is missing; the app falls back to a template default so demos can boot. Set a stable random `BETTER_AUTH_SECRET` before using real user auth. Missing `SKYBASE_DB_ENDPOINT`, DB token, or `SKYBASE_DB_NAMESPACE` does not block `/api/health`, but DB-backed APIs and `/api/auth/*` return `DATABASE_UNCONFIGURED`.
-
-## Authentication
-
-Authentication is handled by Better Auth at:
-
-```txt
-/api/auth/*
-```
-
-Supported auth flows:
-
-- username + password
-- email + password
-- Google login when Google env is provided
-- bearer token transport for API calls
-
-Better Auth data is stored in skybase-db through its Drizzle adapter. Required auth tables are defined in the Drizzle schema and applied by agent database tooling, not by this app at runtime.
-
-## Database Model
-
-The app exposes business APIs to browsers. It does not expose raw database APIs.
-
-Template routes:
-
-```txt
-GET /api/health
-GET /api/auth-config
-/api/auth/*
-GET /api/todos
-POST /api/todos
-PATCH /api/todos/:id
-DELETE /api/todos/:id
-```
-
-The app runtime does not create db instances, create tables, run migrations, or seed data. Controller owns DB provisioning/deploy env injection. Agent tooling owns Drizzle schema setup/migrations through the self-host `setup_database` step. FC runtime only performs business CRUD. The template intentionally does not expose DB setup or migration package scripts; those commands belong to controller/agent tooling so namespace-aware sqld execution stays outside the generated app runtime.
-
-## API Client
-
-Use the shared frontend API wrapper:
-
-```ts
-import { apiFetch } from "@/lib/api";
-```
-
-`apiFetch()` attaches the current Better Auth bearer token by default and shows a toast for non-2xx API responses.
-
-## Build
-
-Build frontend:
+To build exactly what gets deployed:
 
 ```bash
-cd apps/client
 pnpm build
 ```
 
-Build backend for the default FC event adapter entry:
+Output lands in `apps/client/dist/`. To preview it the way GitHub Pages serves
+it, from a subpath, pass the base explicitly:
 
 ```bash
-cd apps/server
-pnpm build
+GH_PAGES_BASE=/anirudh-portfolio/ pnpm build
 ```
 
-Build backend for the long-running web entry used by the Docker image:
+## Deployment
 
-```bash
-cd apps/server
-SERVER_BUILD_TARGET=web pnpm build
-```
+Pushing to `main` triggers `.github/workflows/deploy-pages.yml`, which builds the
+site and publishes it to GitHub Pages. Nothing else is required — the workflow
+enables Pages on first run and derives the base path from the repository name,
+so renaming or forking the repo needs no edit here.
 
-Backend build output:
+Pages must be set to **Settings → Pages → Source → GitHub Actions**. If it is
+ever switched to "Deploy from a branch", Jekyll renders this README as the
+homepage instead of the site.
+
+## Layout
 
 ```txt
-apps/server/dist/index.js
+apps/client/
+  index.html            page shell, meta tags, structured data
+  src/data/portfolio.ts  all site content
+  src/pages/             one folder per route
+  src/components/        layout, navigation, shared pieces
+  public/assets/         images and downloadable documents
+  scripts/               build steps described below
 ```
 
-## Docker
+Routes are `/`, `/work`, `/experience`, `/leadership`, `/recommendations` and
+`/about`, declared in `src/App.tsx`.
 
-Build the backend web entry first, then build the image:
+## How the build works
 
-```bash
-cd apps/server
-SERVER_BUILD_TARGET=web pnpm build
-cd ../..
-docker build -t coding-agent-web-template-api .
-```
+`pnpm build` runs three steps:
 
-The Docker image copies and runs the existing backend build output:
+1. **`vite build`** compiles the site. Because GitHub Pages serves a project site
+   from `/<repo>/` rather than the domain root, the config sets `base` and
+   rewrites root-absolute `/assets/...` references onto it.
+2. **`scripts/postbuild.mjs`** writes `sitemap-routes.json`, then prerenders the
+   home page and bakes the markup into `dist/index.html` so crawlers see real
+   content without running JavaScript.
+3. **`scripts/pages-postbuild.mjs`** rewrites links in that prerendered markup
+   onto the base path, then writes `404.html` and `.nojekyll`.
 
-```txt
-apps/server/dist/index.js
-```
+Two details worth knowing before changing any of this:
 
-The runtime image has a root `package.json` start script and supports platforms that run:
-
-```bash
-npm start
-```
-
-For local container debugging, provide backend runtime env through local container tooling without committing secrets.
-
-## Checks
-
-```bash
-pnpm --filter server exec tsc -p tsconfig.json --noEmit
-pnpm --filter server build
-pnpm --filter client exec tsc -p tsconfig.app.json --noEmit
-pnpm --filter client build
-```
+- **`404.html` is a copy of `index.html`.** GitHub Pages has no SPA rewrite rule,
+  so a deep link such as `/work` requests a file that does not exist and Pages
+  serves `404.html`. The app boots from it and the router renders the real route.
+- **Prerendering runs outside vite**, rendering the `.tsx` sources directly in
+  Node. It therefore knows nothing about `base`, which is why step 3 exists. It
+  also fails on Windows with `ERR_UNSUPPORTED_ESM_URL_SCHEME` and is treated as
+  non-fatal, so a local Windows build produces a small, un-prerendered
+  `index.html` while CI produces the full one. That is expected.

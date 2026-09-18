@@ -284,7 +284,6 @@ async function run() {
   try {
     const { build } = await import("vite");
     const { default: reactPlugin } = await import("@vitejs/plugin-react");
-    const { componentTagger } = await import("lovable-tagger");
     await build({
       configFile: false,
       logLevel: "error",
@@ -294,7 +293,7 @@ async function run() {
       // resolves no route and renders an empty #root. The links this produces
       // are root-absolute; scripts/pages-postbuild.mjs rewrites them onto the
       // base afterwards.
-      plugins: [createPrerenderSafeRenderPlugin(cwd), componentTagger(), reactPlugin()],
+      plugins: [createPrerenderSafeRenderPlugin(cwd), reactPlugin()],
       resolve: { alias: { "@": resolve(cwd, "src") } },
       build: {
         ssr: true,
