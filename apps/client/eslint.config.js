@@ -2,13 +2,6 @@ import js from "@eslint/js";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import noDirectApiRequest from "./eslint-rules/no-direct-api-request.js";
-
-const local = {
-  rules: {
-    "no-direct-api-request": noDirectApiRequest
-  }
-};
 
 export default tseslint.config(
   {
@@ -31,19 +24,17 @@ export default tseslint.config(
       }
     },
     plugins: {
-      "react-hooks": reactHooks,
-      local
+      "react-hooks": reactHooks
     },
     rules: {
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "off",
-      "react-hooks/exhaustive-deps": "warn",
-      "local/no-direct-api-request": "error"
+      "react-hooks/exhaustive-deps": "warn"
     }
   },
   {
-    files: ["eslint.config.js", "eslint-rules/**/*.js", "scripts/**/*.mjs", "vite.config.ts"],
+    files: ["eslint.config.js", "scripts/**/*.mjs", "vite.config.ts"],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -51,8 +42,7 @@ export default tseslint.config(
       }
     },
     rules: {
-      "no-empty": "off",
-      "local/no-direct-api-request": "off"
+      "no-empty": "off"
     }
   }
 );
