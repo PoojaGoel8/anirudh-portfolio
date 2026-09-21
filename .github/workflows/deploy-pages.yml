@@ -38,12 +38,16 @@ jobs:
 
       - name: Build static site
         env:
-          # Derived from the repo name, so renaming the repo or forking it keeps
-          # the asset paths correct with no edit here.
-          GH_PAGES_BASE: /${{ github.event.repository.name }}/
-          # Social preview images must be absolute URLs. Set this to the custom
-          # domain (e.g. https://example.com) if the site moves off github.io.
-          SITE_ORIGIN: https://${{ github.repository_owner }}.github.io
+          # Served from a custom domain, so the site sits at the root rather
+          # than under /<repo>/. Change back to /${{ github.event.repository.name }}/
+          # if the domain is ever removed.
+          GH_PAGES_BASE: /
+          # Regenerated on every deploy on purpose: GitHub clears the custom
+          # domain setting if a publish arrives without this file.
+          GH_PAGES_CNAME: dalmia.org
+          # Social preview images have to be absolute or no platform renders a
+          # preview card.
+          SITE_ORIGIN: https://dalmia.org
         run: pnpm --filter client build
 
       # `enablement` turns Pages on via the API when the repo has not had it

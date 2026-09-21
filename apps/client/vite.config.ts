@@ -35,12 +35,12 @@ function basePrefixAssets(base: string): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // GitHub Pages serves a project site from a subpath
-  // (https://<user>.github.io/<repo>/), so every asset URL needs that prefix
-  // baked in at build time. Override with GH_PAGES_BASE when the repo is
-  // renamed; dev stays at "/".
+  // The site is served from the custom domain dalmia.org, so it lives at the
+  // root and needs no path prefix. Set GH_PAGES_BASE to "/<repo>/" to build for
+  // a GitHub Pages project URL instead; the asset-prefixing plugin below only
+  // engages when the base is not "/".
   const base = mode === 'production'
-    ? (process.env.GH_PAGES_BASE ?? '/anirudh-portfolio/')
+    ? (process.env.GH_PAGES_BASE ?? '/')
     : '/';
 
   return {

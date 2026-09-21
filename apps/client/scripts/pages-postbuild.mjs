@@ -59,12 +59,11 @@ function absolutiseSocialImages(html, origin) {
   );
 }
 
-const prefix = (process.env.GH_PAGES_BASE ?? "/anirudh-portfolio/").replace(/\/$/, "");
-// Override with SITE_ORIGIN when the site moves to a custom domain. Lowercased
-// because the workflow derives it from the repo owner, which keeps its original
-// capitalisation: hostnames resolve either way, but scrapers and canonical URLs
-// are better off with one consistent spelling.
-const origin = (process.env.SITE_ORIGIN ?? "https://poojagoel8.github.io").toLowerCase();
+// Empty for a root-served site, in which case applyBase is a no-op.
+const prefix = (process.env.GH_PAGES_BASE ?? "/").replace(/\/$/, "");
+// Lowercased so scrapers and canonical URLs see one consistent spelling,
+// whatever capitalisation the workflow passes in.
+const origin = (process.env.SITE_ORIGIN ?? "https://dalmia.org").toLowerCase();
 
 let html = applyBase(readFileSync(indexHtml, "utf8"), prefix);
 html = absolutiseSocialImages(html, origin);
