@@ -56,7 +56,7 @@ export function SiteLayout() {
             >
               <span className="linkedin-glyph" aria-hidden="true">in</span>
             </a>
-            <a className="header-cta" href="mailto:anirudhdalmia@hotmail.com">
+            <a className="header-cta" href="mailto:anirudh@dalmia.org">
               Start a conversation <ArrowUpRight size={15} />
             </a>
             <button
