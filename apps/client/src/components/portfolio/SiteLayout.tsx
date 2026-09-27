@@ -102,7 +102,7 @@ export function SiteLayout() {
           <p className="eyebrow light">Build meaningful change</p>
           <h2>Complexity becomes progress when people can see the path.</h2>
           <div className="footer-actions">
-            <a className="button button-light" href="mailto:anirudhdalmia@hotmail.com">
+            <a className="button button-light" href="mailto:anirudh@dalmia.org">
               Email Anirudh <ArrowUpRight size={16} />
             </a>
             <a
