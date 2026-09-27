@@ -84,7 +84,7 @@ export default function AboutPage() {
           <p className="eyebrow">What’s worth discussing?</p>
           <h2>Responsible AI, regulated transformation, or the art of bringing a room with you.</h2>
         </div>
-        <a className="button button-primary" href="mailto:anirudhdalmia@hotmail.com">
+        <a className="button button-primary" href="mailto:anirudh@dalmia.org">
           Email Anirudh <ArrowUpRight size={16} />
         </a>
       </section>
