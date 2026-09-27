@@ -103,7 +103,7 @@ export default function WorkPage() {
           <p className="eyebrow">Interested in the operating approach?</p>
           <h2>Let’s compare notes on responsible transformation.</h2>
         </div>
-        <a className="button button-primary" href="mailto:anirudhdalmia@hotmail.com">
+        <a className="button button-primary" href="mailto:anirudh@dalmia.org">
           Start a conversation <ArrowUpRight size={16} />
         </a>
       </section>
