@@ -44,7 +44,7 @@ const Index = () => (
           <a href="https://www.linkedin.com/in/anirudh-dalmia/" target="_blank" rel="noreferrer">
             <span className="linkedin-glyph small" aria-hidden="true">in</span> LinkedIn <ArrowUpRight size={13} />
           </a>
-          <a href="mailto:anirudhdalmia@hotmail.com">anirudhdalmia@hotmail.com</a>
+          <a href="mailto:anirudh@dalmia.org">anirudh@dalmia.org</a>
         </div>
       </div>
       <div className="hero-media">
